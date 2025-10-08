@@ -1,7 +1,7 @@
 import os
 import mysql.connector
 from mysql.connector import Error
-
+import tkinter.messagebox as msgbox
 ukoly = []
 
 # vytvoření připojení databáze
@@ -23,9 +23,13 @@ def pripojeni_k_databazi():
         )
         if pripojeni.is_connected():
             print("Úspěšně připojeno k databázi\n")
+            # zpráva v GUI
+            msgbox.showinfo("Úspěšně připojeno k databázi.\n")
             return pripojeni
     except Error as chyba:
         print(f"Chyba při připojení k databázi: {chyba}\n")
+        # zpráva v GUI
+        msgbox.showinfo(f"Chyba při připojení k databázi: {chyba}\n")
         return None
 
 # vytvoření tabulky pokud neexistuje
@@ -52,8 +56,12 @@ def vytvoreni_tabulky_v_databazi(pripojeni):
         """)
         pripojeni.commit()
         print("Tabulka 'ukoly' je připravena.\n")
+        # zpráva v GUI
+        msgbox.showinfo("Tabulka 'ukoly' je připravena.\n")
     except Error as chyba:
         print(f"Chyba při vytváření tabulky: {chyba}\n")
+        # zpráva v GUI
+        msgbox.showinfo(f"Chyba při vytváření tabulky: {chyba}\n")
     finally:
         kurzor.close()
         pripojeni.close()
@@ -85,6 +93,8 @@ Ověří, že 'nazev' a 'popis' nejsou prázdné nebo obsahující pouze mezery.
 
     if not pripojeni:
         print("Nelze se připojit k databázi.\n")
+        # zpráva v GUI
+        msgbox.showinfo("Nelze se připojit k databázi.\n")
         return False
     
     try:
@@ -100,6 +110,8 @@ Ověří, že 'nazev' a 'popis' nejsou prázdné nebo obsahující pouze mezery.
         return True
     except Error as chyba:
         print(f"Chyba při ukládání úkolu do databáze: {chyba}\n")
+        # zpráva v GUI
+        msgbox.showinfo(f"Chyba při ukládání úkolu do databáze: {chyba}\n")
         return False
     finally:
         if 'kurzor' in locals():
@@ -125,6 +137,8 @@ def nacist_ukoly_z_databaze(pripojeni=None):
 
         if not pripojeni:
             print("Nelze se připojit k databázi.\n")
+            # zpráva v GUI
+            msgbox.showinfo("Nelze se připojit k databázi.\n")
             return []
 
         kurzor = pripojeni.cursor(dictionary=True)
@@ -135,6 +149,8 @@ def nacist_ukoly_z_databaze(pripojeni=None):
         return ukoly
     except Error as chyba:
         print(f"Chyba při načítání úkolů: {chyba}\n")
+        # zpráva v GUI
+        msgbox.showinfo(f"Chyba při načítání úkolů: {chyba}\n")
         return []
     finally:
         if 'kurzor' in locals():
@@ -162,6 +178,8 @@ def zmenit_stav_ukolu_v_databazi(id_ukolu, novy_stav, pripojeni=None):
 
         if not pripojeni:
            print("Nelze se připojit k databázi.\n")
+           # zpráva v GUI
+           msgbox.showinfo("Nelze se připojit k databázi.\n")
            return False
         kurzor = pripojeni.cursor()
         kurzor.execute(
@@ -174,6 +192,8 @@ def zmenit_stav_ukolu_v_databazi(id_ukolu, novy_stav, pripojeni=None):
         return True 
     except Error as chyba:
         print(f"Chyba při aktualizaci stavu: {chyba}\n")
+        # zpráva v GUI
+        msgbox.showinfo(f"Chyba při aktualizaci stavu: {chyba}\n")
         return False
     finally:
         if 'kurzor' in locals():
@@ -200,6 +220,8 @@ def odstranit_ukol_z_databaze(id_ukolu, pripojeni=None):
 
         if not pripojeni:
             print("Nelze se připojit k databázi.\n")
+            # zpráva v GUI
+            msgbox.showinfo("Nelze se připojit k databázi.\n")
             return False
         kurzor = pripojeni.cursor()
         kurzor.execute("DELETE FROM ukoly WHERE id=%s", (id_ukolu,))
@@ -210,6 +232,8 @@ def odstranit_ukol_z_databaze(id_ukolu, pripojeni=None):
         
     except Error as chyba:
         print(f"Chyba při odstraňování: {chyba}\n")
+        # zpráva v GUI
+        msgbox.showinfo(f"Chyba při odstraňování: {chyba}\n")
         return False
     finally:
         if 'kurzor' in locals():
