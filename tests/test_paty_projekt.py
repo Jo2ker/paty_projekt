@@ -5,7 +5,7 @@ from src.paty_projekt import (
     uloz_ukol_do_databaze, zmenit_stav_ukolu_v_databazi, odstranit_ukol_z_databaze
 )
 
-# Funkce pro připojení
+# Funkce pro připojení k databazi
 def pripojeni_k_testovaci_databazi():
     """
     Připojí se k testovací databázi 'ukoly_db_test'
