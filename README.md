@@ -19,6 +19,17 @@ Pro instalaci doporučuji použít nové virtuální prostředí a s naistalovan
 **$ pip3 --version** *# ověřím verzi manažeru*
 **$ pip3 --install -r requirements.txt** *# nainstalujeme knihovny*
 
+**Nastavení MySQL**
+
+Pomocí mysql.connector.connect() se pokoušíme navázat spojení s MySQL databází.
+
+**host="localhost"**
+- Označuje, že databáze běží lokálně (na stejném počítači jako tento skript).
+**user="root"**
+- Používá se uživatel root, což je výchozí administrátorský účet v MySQL.
+**password="1234"**
+- Heslo k účtu root.
+
 **Spuštění projektu**
 
 Spuštění souboru **paty_projekt.py** v rámci příkazového řádku.
