@@ -19,7 +19,7 @@ def pripojeni_k_testovaci_databazi():
         pripojeni = mysql.connector.connect(
             host='127.0.0.1',
             user='root',
-            password='123QweaSdyxC',
+            password='1234',
             database='ukoly_db_test'
         )
         if pripojeni.is_connected():
